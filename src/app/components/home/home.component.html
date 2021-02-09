@@ -1,0 +1,19 @@
+<div class="row row-cols-1 row-cols-md-3 g-4">
+   
+  <div class="card" *ngIf="_travel.getMarkets().length === 0">
+    <div class="aler alert-info">
+      There is no information, please add it
+    </div>
+  </div>
+
+    <div class="col" *ngFor="let market of _travel.getMarkets()">
+      <div class="card shadow p-3 mb-5 mt-5 bg-white rounded animate__animated animate__fadeIn" (click)="getMarket(market.id)">
+        <img [src]="market.flag" class="card-img-top" alt="flag">
+        <div class="card-body">
+          <h5 class="card-title">{{market.name}} / {{market.code}}</h5>
+          <p class="card-text">Fares:  {{market.fare|myCurrency:market}}</p>
+        </div>
+      </div>
+    </div>
+   
+</div>

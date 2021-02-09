@@ -1,0 +1,93 @@
+<div class="row">
+    <div class="col">    
+        <a class="btn btn-outline-primary float-end" routerLink="/setup"><i class="fa fa-list-ol" aria-hidden="true"></i> List</a>
+    </div>
+</div>
+
+
+<div class="card shadow p-3 mb-5 mt-5 bg-white rounded">
+    <div class="card-body">
+        <h5 class="card-title mb-5">Create currency format</h5>
+
+        <form (ngSubmit)="save()" [formGroup]="form" autocomplete="off">
+
+            <div class="mb-3 col-sm-12 col-md-6">
+                <label class="form-label">Country</label>
+                <input class="form-control" typr="text" placeholder="Type to search..." formControlName="name">
+
+                <ul class="list-group" *ngIf="showFiltered">
+                    <li  *ngIf="isLoading"  class="list-group-item list-group-item-action">
+                        <div class="spinner-grow" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                          </div>
+                    </li>
+                    <li *ngFor="let country of filteredCountries" class="list-group-item list-group-item-action" (click)="selectCountry(country)">
+                        <a class="nav-link" ><img [src]="country.flag" class="flag-list"> {{country.name}}</a>
+                    </li>
+                </ul>  
+                    
+                <span class="form-text text-danger" 
+                    *ngIf="fieldInValid('name')"    
+                    >
+                    Country is required
+                </span>
+            </div>
+
+            <div class="row">
+
+                <div class="mb-3 col-sm-12 col-md-4">       
+                    <label class="form-label">Currency Code</label>         
+                    <select class="form-select" formControlName="code">
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                      </select>
+                    <span class="form-text text-danger" 
+                            *ngIf="fieldInValid('code')"    
+                            >
+                            Code is required
+                    </span>
+                </div>
+
+                <div class="mb-3col-sm-12 col-md-4">
+                   
+                    <label class="form-label">Currency Symbol</label>         
+                    <select class="form-select" formControlName="symbol">
+                        <option value="$">$</option>
+                        <option value="€">€</option>
+                      </select>
+                    <span class="form-text text-danger" 
+                        *ngIf="fieldInValid('symbol')"    
+                        >
+                        Symbol is required
+                    </span>
+                </div>
+
+                <div class="mb-3 col-sm-12 col-md-4">
+                    <label class="form-label">Fare</label>
+                    <input class="form-control" type="number" formControlName="fare">
+                    <span class="form-text text-danger" 
+                            *ngIf="fieldInValid('fare')"    
+                            >
+                            Fare is required
+                    </span>
+                </div>
+
+            </div>
+
+           
+            <div class="row">
+                <div class="col">
+                    <button type="submit"
+                            class="btn btn-primary float-end"
+                            >
+                        Save
+                    </button>
+                </div>
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>

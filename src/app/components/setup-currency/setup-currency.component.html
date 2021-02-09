@@ -1,0 +1,42 @@
+
+<a class="btn btn-outline-success float-end mb-4" routerLink="/create"> <i class="fa fa-plus" aria-hidden="true"></i> Create</a>
+
+<h1>List of fares by markets</h1>
+<hr>
+
+<table class="table table-sm table-dark table-striped table-hover table-responsive mt-5 animate__animated animate__fadeIn">
+    <div class="table-responsive">
+        <table class="table align-middle">
+        <thead>
+            <tr>
+                <th>#</th>
+                <td class="flag p10"></td>
+                <th class="sort" scope="col" [appSort]="markets" data-order="desc" data-name="name"> <i class="fa fa-sort" aria-hidden="true"></i> Country</th>
+                <th class="sort" scope="col" [appSort]="markets" data-order="desc" data-name="code"> <i class="fa fa-sort" aria-hidden="true"></i> Currency</th>
+                <th>Symbol</th>
+                <th>Fare</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="align-center" *ngFor="let market of markets; let i = index">
+                <th>{{i+1}}</th>
+                <td >
+                    <img [src]="market.flag" 
+                        style=" max-width: 100%;
+                        height: auto !important;"
+                    class="img-fluid rounded " alt="flag">
+                </td>
+                <td >{{market.name}}</td>
+                <td >{{market.code}}</td>
+                <td >{{market.symbol}}</td>
+                <td >{{market.fare| myCurrency:market}}</td>
+                <td>
+                    <a class="btn btn-outline-success me-2" [routerLink]="[ '/setup', market.id ]"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <a class="btn btn btn-outline-danger" (click)="deleteMarket(market)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+</table>
