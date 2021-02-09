@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 import { Country } from '../interfaces/pais.interface';
 import { Market } from '../models/market.model';
 
@@ -49,12 +50,26 @@ export class TravelService {
 
   createMarket(market: Market){
     this.markets.push( market );
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Your data has been saved',
+      showConfirmButton: false,
+      timer: 1500
+    })
     this.saveStorage();
   }
 
   editMarket(market: Market){
     this.markets = this.markets.filter( marketData =>  marketData.id !== market.id)
     this.markets.push(market);
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Your data has been updated',
+      showConfirmButton: false,
+      timer: 1500
+    })
     this.saveStorage();
   }
 
